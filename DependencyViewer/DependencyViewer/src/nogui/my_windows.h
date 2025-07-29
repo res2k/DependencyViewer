@@ -11,6 +11,9 @@
 #endif
 
 
+#if !defined(RC_INVOKED)
+#include <phnt_windows.h>
+#endif
 #include <windows.h>
 
 

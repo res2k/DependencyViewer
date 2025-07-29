@@ -1107,10 +1107,10 @@ void main_window::properties(wstring_handle data /* = wstring_handle{} */)
 		WARN_M_R((attributes_2 & SFGAO_FILESYSTEM) != 0, L"Shell item has not SFGAO_FILESYSTEM attribute.", false);
 		auto const free_sub_file_rel = mk::make_scope_exit([&](){ CoTaskMemFree(sub_file_rel); });
 
-		ITEMIDLIST const* chidren[1];
-		chidren[0] = sub_file_rel;
+		ITEMID_CHILD const* children[1];
+		children[0] = (ITEMID_CHILD const*)sub_file_rel;
 		IContextMenu* context_menu;
-		HRESULT const got_ui_object = sub_folder->lpVtbl->GetUIObjectOf(sub_folder, nullptr, 1, chidren, IID_IContextMenu, nullptr, reinterpret_cast<void**>(&context_menu));
+		HRESULT const got_ui_object = sub_folder->lpVtbl->GetUIObjectOf(sub_folder, nullptr, 1, children, IID_IContextMenu, nullptr, reinterpret_cast<void**>(&context_menu));
 		WARN_M_R(got_ui_object == S_OK, L"Failed to IShellFolder::GetUIObjectOf.", false);
 		com_ptr<IContextMenu> const context_menu_sp(context_menu);
 
